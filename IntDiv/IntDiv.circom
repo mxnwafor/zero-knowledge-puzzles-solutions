@@ -14,7 +14,22 @@ template IntDiv(n) {
     signal input numerator;
     signal input denominator;
     signal input quotient;
-    signal input remainder;
+    signal input remainder;    
+
+    component isz = IsZero();
+    component lessThan = LessThan(252);
+
+    // handle division by zero
+    // numerator = denominator * quotient + remainder
+
+    isz.in <== denominator;
+    isz.out === 0;
+
+    lessThan.in[0] <== remainder;
+    lessThan.in[1] <== denominator;
+    lessThan.out === 1;
+
+    numerator === denominator * quotient + remainder;
 
 }
 
