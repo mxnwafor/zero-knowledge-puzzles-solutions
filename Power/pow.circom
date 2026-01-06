@@ -26,7 +26,7 @@ template Pow() {
       // Formula: multiplier = (base_powers[i] - 1) * bit + 1
       mult[i] <== (base_powers[i] - 1) * n2b.out[i] + 1;
 
-      // multiply
+      // multiply and hold remainder.
       result[i+1] <== result[i] * mult[i];
 
       // next input is the square of the previous
