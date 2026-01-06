@@ -6,8 +6,16 @@ pragma circom 2.1.4;
 
 template ForLoop() {
 
-// Your Code here..
+    // Your Code here..
+    signal input a[2];
+    signal output c;
 
+    var accumulator;
+    for (var i = 0; i < 4; i++) {
+        accumulator += a[0] + a[1];
+    }
+
+    c <== accumulator;
 }  
 
 component main = ForLoop();
