@@ -13,6 +13,16 @@ template IsTribonacci(n) {
     // the rest are the sum of the previous three
     // circuit must work for arbitrary n
 
+    in[0] === 0;
+    in[1] === 1;
+    in[2] === 1;
+
+    var acc;
+    for (var i = 3; i < n; i++) {
+        acc = in[i - 1] + in[i - 2] + in[i - 3];
+        in[i] === acc;
+    }
+
 }
 
 component main = IsTribonacci(9);
