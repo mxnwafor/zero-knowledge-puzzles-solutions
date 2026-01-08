@@ -24,6 +24,17 @@ include "../node_modules/circomlib/circuits/comparators.circom";
 template IntSqrt(n) {
     signal input in[2];
 
+    component lt = LessThan(252);
+    component gt = GreaterThan(252);
+
+    lt.in[0] <== (in[0] - 1) * (in[0] - 1);
+    lt.in[1] <== in[1];
+
+    gt.in[0] <== (in[0] + 1) * (in[0] + 1);
+    gt.in[1] <== in[1];
+
+    // assert both outputs
+    lt.out === gt.out;
 }
 
 component main = IntSqrt(252);
