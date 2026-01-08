@@ -5,9 +5,6 @@ pragma circom 2.1.8;
 // signals are 0 return 0. If any of the signals are not
 // 0 or 1 the circuit should not be satisfiable.
 
-include "../node_modules/circomlib/circuits/comparators.circom";
-include "../node_modules/circomlib/circuits/gates.circom";
-
 template MultiANDY(n) {
     signal input in[n];
     signal output out;
