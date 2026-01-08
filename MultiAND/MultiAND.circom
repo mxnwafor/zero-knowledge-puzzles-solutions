@@ -12,32 +12,22 @@ template MultiANDY(n) {
     signal input in[n];
     signal output out;
 
-    component equal[n];
-    component and[n - 1];
-
     signal acc[n];
-    signal k;
-    k <== 1;
 
-    for (var i = 0; i < n; i++) {
-        // Binary Constraint
+    // Binary constraint.
+    in[0] * (in[0] - 1) === 0;
+    // Feed first bit into acc.
+    acc[0] <== in[0];
+
+    for (var i = 1; i < n; i++) {
         in[i] * (in[i] - 1) === 0;
-        equal[i] = IsEqual();
-
-        equal[i].in[0] <== in[i];
-        equal[i].in[1] <== k;
-
-        if (i == 0) {
-            acc[i] <== equal[i].out;
-        } else {
-            and[i - 1] = AND();
-            and[i - 1].a <== acc[i - 1];
-            and[i - 1].b <== equal[i].out;
-            acc[i] <== and[i - 1].out;
-        }
+        // Perform AND operation between previous bit in acc and current input bit.
+        acc[i] <== acc[i - 1] * in[i];
     }
 
+    // assign and constrain the last value to out
     out <== acc[n - 1];
 }
 
 component main = MultiANDY(4);
+
